@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 22, 2021 at 11:14 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.4.15
+-- Host: localhost:3306
+-- Generation Time: Mar 22, 2021 at 07:20 PM
+-- Server version: 8.0.23-0ubuntu0.20.04.1
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -28,12 +29,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tb_anggota` (
-  `id_anggota` int(11) NOT NULL,
+  `id_anggota` int NOT NULL,
   `nama` varchar(255) NOT NULL,
   `alamat` varchar(255) NOT NULL,
   `nik` varchar(255) NOT NULL,
-  `id_user` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id_user` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tb_anggota`
@@ -64,14 +65,33 @@ INSERT INTO `tb_anggota` (`id_anggota`, `nama`, `alamat`, `nik`, `id_user`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_bahasan`
+--
+
+CREATE TABLE `tb_bahasan` (
+  `id` int NOT NULL,
+  `bahasan` text NOT NULL,
+  `id_undangan` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tb_bahasan`
+--
+
+INSERT INTO `tb_bahasan` (`id`, `bahasan`, `id_undangan`) VALUES
+(2, '1. Bahasan Itu itu aja', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_kehadiran`
 --
 
 CREATE TABLE `tb_kehadiran` (
-  `id_kehadiran` int(11) NOT NULL,
-  `id_rapat` int(11) NOT NULL,
-  `id_anggota` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id_kehadiran` int NOT NULL,
+  `id_rapat` int NOT NULL,
+  `id_anggota` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -80,12 +100,12 @@ CREATE TABLE `tb_kehadiran` (
 --
 
 CREATE TABLE `tb_kepala` (
-  `id_kepala` int(11) NOT NULL,
-  `id_anggota` int(11) NOT NULL,
+  `id_kepala` int NOT NULL,
+  `id_anggota` int NOT NULL,
   `mulai_thn_jabatan` date NOT NULL,
   `akhir_thn_jabatan` date NOT NULL,
-  `id_user` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id_user` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tb_kepala`
@@ -101,13 +121,13 @@ INSERT INTO `tb_kepala` (`id_kepala`, `id_anggota`, `mulai_thn_jabatan`, `akhir_
 --
 
 CREATE TABLE `tb_rapat` (
-  `id_rapat` int(11) NOT NULL,
-  `id_undangan` int(11) NOT NULL,
-  `id_kepala` int(11) NOT NULL,
+  `id_rapat` int NOT NULL,
+  `id_undangan` int NOT NULL,
+  `id_kepala` int NOT NULL,
   `hal` varchar(255) NOT NULL,
   `hasil_rapat` text NOT NULL,
   `tgl` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tb_rapat`
@@ -124,12 +144,12 @@ INSERT INTO `tb_rapat` (`id_rapat`, `id_undangan`, `id_kepala`, `hal`, `hasil_ra
 --
 
 CREATE TABLE `tb_undangan` (
-  `id_undangan` int(11) NOT NULL,
+  `id_undangan` int NOT NULL,
   `hal` text NOT NULL,
   `tgl` date NOT NULL,
   `waktu` time NOT NULL,
   `tempat` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tb_undangan`
@@ -146,11 +166,11 @@ INSERT INTO `tb_undangan` (`id_undangan`, `hal`, `tgl`, `waktu`, `tempat`) VALUE
 --
 
 CREATE TABLE `tb_user` (
-  `id_user` int(11) NOT NULL,
+  `id_user` int NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `level` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `level` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tb_user`
@@ -187,10 +207,10 @@ INSERT INTO `tb_user` (`id_user`, `username`, `password`, `level`) VALUES
 --
 
 CREATE TABLE `tb_verifikasi` (
-  `id_verifikasi` int(11) NOT NULL,
-  `id_rapat` int(11) NOT NULL,
+  `id_verifikasi` int NOT NULL,
+  `id_rapat` int NOT NULL,
   `status` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Indexes for dumped tables
@@ -202,6 +222,13 @@ CREATE TABLE `tb_verifikasi` (
 ALTER TABLE `tb_anggota`
   ADD PRIMARY KEY (`id_anggota`),
   ADD KEY `anggota_user` (`id_user`);
+
+--
+-- Indexes for table `tb_bahasan`
+--
+ALTER TABLE `tb_bahasan`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tb_bahasan` (`id_undangan`);
 
 --
 -- Indexes for table `tb_kehadiran`
@@ -254,43 +281,49 @@ ALTER TABLE `tb_verifikasi`
 -- AUTO_INCREMENT for table `tb_anggota`
 --
 ALTER TABLE `tb_anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_anggota` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `tb_bahasan`
+--
+ALTER TABLE `tb_bahasan`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_kehadiran`
 --
 ALTER TABLE `tb_kehadiran`
-  MODIFY `id_kehadiran` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kehadiran` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_kepala`
 --
 ALTER TABLE `tb_kepala`
-  MODIFY `id_kepala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_kepala` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_rapat`
 --
 ALTER TABLE `tb_rapat`
-  MODIFY `id_rapat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_rapat` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_undangan`
 --
 ALTER TABLE `tb_undangan`
-  MODIFY `id_undangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_undangan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tb_verifikasi`
 --
 ALTER TABLE `tb_verifikasi`
-  MODIFY `id_verifikasi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_verifikasi` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -301,6 +334,12 @@ ALTER TABLE `tb_verifikasi`
 --
 ALTER TABLE `tb_anggota`
   ADD CONSTRAINT `anggota_user` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`);
+
+--
+-- Constraints for table `tb_bahasan`
+--
+ALTER TABLE `tb_bahasan`
+  ADD CONSTRAINT `tb_bahasan` FOREIGN KEY (`id_undangan`) REFERENCES `tb_undangan` (`id_undangan`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `tb_kehadiran`
