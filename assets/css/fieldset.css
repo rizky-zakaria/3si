@@ -1,0 +1,13 @@
+fieldset {
+	border: 1px solid #DDDDDD;
+	display: inline-block;
+	font-size: 14px;
+    padding: 1em 2em;
+    width: 100%;
+}
+
+legend {
+    width: auto;
+	margin-bottom: 10px;
+	padding: 0.5em 1em;
+}

@@ -1,0 +1,26 @@
+#contsukel{
+    background-color: aliceblue;
+    height: auto;
+    width: auto;
+    margin-left: 330px;
+    padding: 50px;
+    border-radius: 9px;
+}
+
+.listkeluar{
+    background-color: #43e24b;
+    width: 1050px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 17px;
+    text-align: center;
+    margin-top: 5px;
+    margin-left: -6px;
+}
+
+#tambahsuratkeluar{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 30px;
+    margin-left: -4px;
+
+}
+

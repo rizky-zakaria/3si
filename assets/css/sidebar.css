@@ -1,0 +1,36 @@
+#indexHome{
+    background-color: #fc0703;
+    border-radius: 10px;
+    height: 250px;
+    
+}
+
+#indexTabel{
+    margin: 50px;
+}
+
+#contsukel{
+    text-align: center;
+    background-color: rgb(25, 117, 255);
+    border-radius: 10px;
+    height: inherit;
+    
+}
+#contsumak{
+    text-align: center;
+    background-color: rgb(25, 117, 255);
+    border-radius: 10px;
+    
+}          
+#tabelsu{
+    width: inherit;
+    height: inherit;
+}
+  #profil{
+    background-color: rgb(25, 117, 255);
+    border-radius: 10px;
+    height: 250px;
+  }
+  #atas{
+      background-color: #fc0703;
+  }

@@ -1,0 +1,30 @@
+<div class="card bg-light mb-3" style="max-width: 100%;">
+	<div
+     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h6 class="m-0 font-weight-bold text-danger">Hasil Rapat</h6>
+       <div class="dropdown no-arrow">
+         </div>
+           </div>
+		<form action="<?= base_url("RapatController/updateData"); ?>" method="post">
+			<div class="form-group">
+				<label for="rapat">Agenda</label>
+				<!-- <input type="hidden" class="form-control" id="Id_undangan" name="id_und" placeholder="Id_undangan" value="<?= $rapat['id_undangan']; ?>"> -->
+				<select name="id_undangan" class="form-control" id="sel1">
+                <?php foreach ($undangan as $agt ) { ?>
+                  <option value="<?= $agt['id_undangan']; ?>"><?= $agt['hal']; ?></option> 
+                <?php
+                } ?>           
+            </select>
+				<input type="hidden" class="form-control" id="Id_undangan" name="id" value="<?= $rapat['id_rapat']; ?>">
+			</div>
+			
+			<div class="form-group">
+				<label for="rapat">Hasil Rapat</label>
+				<input type="text" class="form-control" id="Hasil_rapat" name="Hasil_rapat" placeholder="Hasil_rapat" value="<?= $rapat['hasil_rapat']; ?>">
+			</div>
+			
+			<div class="form-group">
+				<input type="submit" class="form-control btn-success" value="Simpan">
+			</div>
+		</form>
+	</div>
